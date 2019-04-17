@@ -46,7 +46,7 @@ router.get('/users/:id/avatar', async (req, res) => {
         const user = await User.findById(req.params.id)
 
         if(!user || !user.avatar){
-            throw new Error()
+            throw new Error('Teste')
         }
 
         res.set('Content-Type', 'image/png')
@@ -143,8 +143,8 @@ router.post('/users', async (req, res) => {
 })
 
 router.post('/users/me/avatar', auth, avatar.single('avatar'), async (req, res) => {
-    
     const buffer = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer()
+
 
     req.user.avatar = buffer
 
@@ -154,7 +154,7 @@ router.post('/users/me/avatar', auth, avatar.single('avatar'), async (req, res) 
     
 }, (erro, req, res, next) => {
 
-    res.status(400).send({erro: erro.message})
+    res.status(400).send({erro: 'teste'})
 })
 
 router.delete('/users/me', auth, async (req, res) => {

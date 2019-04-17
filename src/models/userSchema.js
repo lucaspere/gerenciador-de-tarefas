@@ -26,12 +26,12 @@ const userSchema =  new mongoose.Schema({
     password: {
         type: String,
         unique: true,
-        minLenght: 7,
+        minLength: 7,
         required: true,
         trim: true,
         validate(value){
             if(value.toLowerCase().includes('password')){
-                throw new Error('Senha incorreta!')
+                throw new Error('Senha inválida!')
             }
         }
     },
